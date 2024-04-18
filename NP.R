@@ -19,7 +19,7 @@ ptri=function(a,b,c,x){
 }
 library(ggplot2)
 ggplot(data = NULL,aes(x)) + stat_ecdf(geom = "step") + geom_line(data = NULL, aes(q,punif(q,0,10)), col="red") + geom_line(data = NULL, aes(q,ptri(0,10,5,q)), col="blue")
-
+#Both Uniform Distribution and Triangular Distributions seem to be good fit
 
 #2
 rm(list = ls())
@@ -35,25 +35,32 @@ summary(McBeta)
 summary(McGamma)
 summary(McDelta)
 
-boxplot(McAlpha)
-boxplot(McBeta)
-boxplot(McGamma)
-boxplot(McDelta)
+par(mfrow=c(2,4))
+boxplot(McAlpha, main="Boxplot of McAlpha")
+boxplot(McBeta, main="Boxplot of McBeta")
+boxplot(McGamma, main="Boxplot of McGamma")
+boxplot(McDelta, main="Boxplot of McDelta")
 
-hist(McAlpha)
-lines(McAlpha)
+hist(McAlpha, prob=TRUE)
+lines(density(McAlpha),col="red")
 
-hist(McBeta)
-lines(McBeta)
+hist(McBeta, prob=TRUE)
+lines(density(McBeta),col="red")
 
-hist(McGamma)
-lines(McGamma)
+hist(McGamma, prob=TRUE)
+lines(density(McGamma),col="red")
 
-hist(McDelta)
-lines(McDelta)
+hist(McDelta, prob=TRUE)
+lines(density(McDelta),col="red")
 
 library(ggplot2)
 ggplot(data = NULL,aes(McAlpha)) + stat_ecdf(geom = "step")
 ggplot(data = NULL,aes(McBeta)) + stat_ecdf(geom = "step")
 ggplot(data = NULL,aes(McGamma)) + stat_ecdf(geom = "step")
 ggplot(data = NULL,aes(McDelta)) + stat_ecdf(geom = "step")
+
+######### Pract 2
+rm(list=ls())
+par(mfrow=c(
+x=c(21,44,141,6,18,39,48,11,42,11,12,35,24,83,50,91,81,42,61,147,12,94,35,83,94,2,111,91,117,11,73,48,88,33,5,22,210,91,44,17)
+hist(x)
