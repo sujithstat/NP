@@ -64,3 +64,40 @@ rm(list=ls())
 par(mfrow=c(
 x=c(21,44,141,6,18,39,48,11,42,11,12,35,24,83,50,91,81,42,61,147,12,94,35,83,94,2,111,91,117,11,73,48,88,33,5,22,210,91,44,17)
 hist(x)
+
+#Jacknife Estimator
+#1
+rm(list = ls())
+dat=c(2.1,2.4,2.8,3.0,3.3,3.7,3.9)
+n=length(dat)
+original_mean=mean(dat)
+leave_one_out_means=numeric(n)
+for(i in 1:n)
+  leave_one_out_means[i]=mean(dat[-i])
+jacknife_mean=mean(leave_one_out_means);jacknife_mean
+bias=(n-1)*(jacknife_mean-original_mean);bias
+jacknife_variance=((n-1)/n)*sum((jacknife_mean-original_mean)^2);jacknife_variance
+
+
+
+#2
+rm(list = ls())
+set.seed(100)
+n=10
+x=sample(1:100,size = n)
+#Jacknife estimator SE
+M=numeric(n)
+for(i in 1:n){
+  y=x[-i]
+  M[i]=median(y)
+}
+Mbar=mean(M)
+jacknife_se=((n-1)/n)*sum((Mbar-M)^2)
+
+#Bootstrap SE
+B=1000
+bootstrap_medians=replicate(B,{sample_data=sample(x,size = length(x),replace = TRUE)
+median(sample_data)})
+bootstrap_median=median(bootstrap_medians)
+bootstrap_se=sd(bootstrap_medians)
+cat("Jacknife estimate of SE:",jacknife_se,"\n","Bootstrap estimate of SE:",bootstrap_se,"\n")
