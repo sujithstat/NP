@@ -65,6 +65,24 @@ par(mfrow=c(
 x=c(21,44,141,6,18,39,48,11,42,11,12,35,24,83,50,91,81,42,61,147,12,94,35,83,94,2,111,91,117,11,73,48,88,33,5,22,210,91,44,17)
 hist(x)
 
+######### Pract-8 ##########
+#Bootstrap
+rm(list = ls())
+set.seed(100)
+heights=c(175,168,170,168,162,165,167,155)
+B=1000 #No. of bootstrap sample
+bootstrap_medians=replicate(B,{sample_data=
+  sample(heights,size = length(heights),replace = TRUE)
+median(sample_data)})
+bootstrap_median=median(bootstrap_medians);bootstrap_median
+bootstrap_se=sd(bootstrap_medians);bootstrap_se
+CI=quantile(bootstrap_medians,c(0.025,0.975));CI
+#plot distn of bootstrap medians
+hist(bootstrap_medians,breaks=30,main="Bootstrap distn of median",xlab="Median")
+abline(v=CI)
+abline(v=bootstrap_medians)
+
+############ Pract-10 ###############  
 #Jacknife Estimator
 #1
 rm(list = ls())
